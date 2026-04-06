@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Digital Marketing Ebook - Lead Gen Landing</title>
+    <!-- Google Fonts: Poppins + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+            color: #2d3748; 
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navbar (Minimal) */
+        .navbar {
+            position: fixed; top: 0; width: 100%; 
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(20px); 
+            z-index: 1000; padding: 1rem 0; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700;
+        /* color: #8B5CF6;*/ 
+         color:   #b16cea ;
+         text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: #4a5568; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #8B5CF6; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+        .bar { width: 25px; height: 3px; background: #4a5568; transition: 0.3s; }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh; 
+            display: flex; align-items: center; 
+            background: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 50%, #FCD34D 100%);
+            position: relative; overflow: hidden; color: white; padding-top: 80px;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+            background: url('https://i.pinimg.com/1200x/72/4d/ff/724dff242047106f8f415dd3a1fb5b26.jpg') center/cover; opacity: 0.15;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; text-align: center; animation: fadeInUp 1.2s ease; }
+        .hero h1 { 
+            font-family: 'Poppins', sans-serif; font-size: clamp(3rem, 8vw, 5rem); 
+            font-weight: 800; margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .hero p { font-size: 1.4rem; margin-bottom: 2.5rem; opacity: 0.95; }
+        .hero-cta { 
+            background: white; color: #8B5CF6; padding: 1.2rem 3rem; 
+            border-radius: 50px; font-size: 1.2rem; font-weight: 700; text-decoration: none; 
+            box-shadow: 0 10px 30px rgba(255,255,255,0.4); transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .hero-cta:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(255,255,255,0.6); }
+
+        /* Section Styles */
+        section { padding: 120px 0; }
+        .section-title { 
+            font-family: 'Poppins', sans-serif; text-align: center; 
+            font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 4rem; color: #1a202c;
+            position: relative;
+        }
+        .section-title::after { 
+            content: ''; position: absolute; width: 80px; height: 5px; 
+            background: linear-gradient(90deg, #8B5CF6, #FCD34D); bottom: -15px; left: 50%; 
+            transform: translateX(-50%); border-radius: 3px;
+        }
+
+        /* Benefits Grid (Staggered) */
+        .benefits { background: white; }
+        .benefits-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2.5rem; max-width: 1100px; margin: 0 auto;
+        }
+        .benefit-card { 
+            background: white; padding: 2.5rem; border-radius: 24px; 
+            text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+        .benefit-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; 
+            background: linear-gradient(90deg, #8B5CF6, #FCD34D);
+        }
+        .benefit-card:hover { transform: translateY(-15px) rotate(1deg); box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
+        .benefit-icon { font-size: 4rem; color: #8B5CF6; margin-bottom: 1.5rem; }
+        .benefit-card h3 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; margin-bottom: 1rem; }
+
+        /* Lead Form (Floating Card) */
+        .form-section { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+        .lead-form-container { 
+            max-width: 600px; margin: 0 auto; background: white; 
+            padding: 3.5rem; border-radius: 32px; box-shadow: 0 25px 80px rgba(139,92,246,0.15); 
+            position: relative; animation: floatIn 1.5s ease;
+        }
+        .lead-form-container::before {
+            content: ''; position: absolute; top: -10px; left: 50%; 
+            transform: translateX(-50%); width: 60px; height: 60px; 
+            background: linear-gradient(135deg, #8B5CF6, #FCD34D); border-radius: 50%; z-index: 1;
+        }
+        .form-title { text-align: center; margin-bottom: 2rem; color: #1a202c; }
+        .form-group { margin-bottom: 1.8rem; position: relative; }
+        .form-group input { 
+            width: 100%; padding: 1.3rem 1.2rem; border: 2px solid #e2e8f0; 
+            border-radius: 16px; font-size: 1.1rem; transition: all 0.3s ease; 
+            font-family: inherit;
+        }
+        .form-group input:focus { outline: none; border-color: #8B5CF6; box-shadow: 0 0 0 4px rgba(139,92,246,0.1); transform: translateY(-2px); }
+        .submit-btn { 
+            width: 100%; background: linear-gradient(135deg, #8B5CF6, #FCD34D); 
+            color: white; border: none; padding: 1.3rem; border-radius: 16px; 
+            font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.4s ease;
+        }
+        .submit-btn:hover:not(:disabled) { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(139,92,246,0.4); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        /* Success Modal */
+        .success-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;
+        }
+        .success-content { 
+            background: white; padding: 3rem; border-radius: 24px; text-align: center; 
+            max-width: 450px; animation: bounceIn 0.6s ease;
+        }
+        .success-icon { font-size: 5rem; color: #10B981; margin-bottom: 1rem; }
+        .success-content h2 { color: #1a202c; margin-bottom: 1rem; }
+
+        /* Social Proof */
+        .testimonials { background: #f8fafc; }
+        .testimonials-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; max-width: 1000px; margin: 0 auto;
+        }
+        .testimonial-card { 
+            background: white; padding: 2rem; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative;
+        }
+        .stars { color: #FCD34D; font-size: 1.2rem; margin-bottom: 1rem; }
+        .testimonial-avatar { 
+            width: 60px; height: 60px; border-radius: 50%; 
+            background: linear-gradient(135deg, #8B5CF6, #FCD34D); 
+            margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: white;
+        }
+
+        /* Trust Badges */
+        .trust { text-align: center; padding: 80px 0; }
+        .trust-badges { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
+        .badge { 
+            background: white; padding: 1.5rem 2rem; border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s;
+        }
+        .badge:hover { transform: translateY(-5px) scale(1.05); }
+        .badge i { font-size: 2.5rem; color: #8B5CF6; margin-bottom: 0.5rem; }
+        .badge h4 { font-size: 1.1rem; font-weight: 600; }
+
+        /* Final CTA */
+        .final-cta { 
+           /* background: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%); */
+          background: linear-gradient(135deg, #8B5CF6, #FCD34D); 
+
+            color: white; text-align: center; position: relative; overflow: hidden;
+        }
+        .final-cta::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; 
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;}
+        .cta-content { position: relative; z-index: 2;  }
+
+        .cta-content a{
+
+            display: inline-block;
+            margin-top: 30px;
+
+            
+            
+        }
+
+        /* Footer */
+        .footer { background: #1a202c; color: white; text-align: center; padding: 3rem 0 1rem; }
+        .social-icons { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .social-icons a { 
+            width: 50px; height: 50px; background: rgba(255,255,255,0.1); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            color: white; text-decoration: none; transition: all 0.3s ease;
+        }
+        .social-icons a:hover { background: #8B5CF6; transform: translateY(-5px); }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floatIn { 0% { transform: translateY(30px) scale(0.95); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+        @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes shine { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
+
+        /* Responsive Mobile-First */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { 
+                position: fixed; top: 80px; left: -100%; width: 100%; 
+                flex-direction: column; background: white; padding: 2rem; 
+                transition: left 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { left: 0; }
+            .hero h1 { font-size: 2.8rem; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .trust-badges { gap: 1.5rem; }
+            .lead-form-container { padding: 2.5rem 2rem; margin: 0 10px; }
+            .cta-content a{ white-space: nowrap; font-size: 15px;}
+        } 
+        @media (max-width: 480px) {
+            .hero { padding-top: 100px; }
+            section { padding: 80px 0; }
+            .section-title { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="#" class="logo">LeadMaster</a>
+            <ul class="nav-links">
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#form">Get Ebook</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Get Your <strong>Free</strong> Digital Marketing Ebook Now</h1>
+                <p>Master proven strategies that generated 10,000+ leads. Step-by-step guide from experts. Instant download!</p>
+                <a href="#form" class="hero-cta">Download Free Ebook</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2 class="section-title">Why This Ebook Will Transform Your Business</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Advanced Lead Gen Strategies</h3>
+                    <p>Proven tactics that convert 47% better than industry average</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Save Time & Money</h3>
+                    <p>Skip trial-and-error with ready-to-use templates & funnels</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>Expert Insights</h3>
+                    <p>10+ years experience distilled into actionable steps</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-list-check"></i></div>
+                    <h3>Step-by-Step Guide</h3>
+                    <p>Complete implementation roadmap - from setup to scaling</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Form -->
+    <section id="form" class="form-section">
+        <div class="lead-form-container">
+            <h2 class="form-title section-title">Get Instant Access to Your Free Ebook</h2>
+            <form id="leadForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Phone Number" required>
+                </div>
+                <button type="submit" class="submit-btn">Get Instant Access <i class="fas fa-download"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What People Are Saying</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="testimonial-avatar">JD</div>
+                    <p>"This ebook doubled our leads in 2 weeks! Real strategies that actually work."</p>
+                    <h4>John Doe, CEO TechStartup</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="testimonial-avatar">SM</div>
+                    <p>"Step-by-step perfection. Saved us $10K in agency fees."</p>
+                    <h4>Sarah Mitchell, Marketing Dir.</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="testimonial-avatar">MR</div>
+                    <p>"Best marketing resource I've found. 5 stars!"</p>
+                    <h4>Mike Roberts, Founder</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust">
+        <div class="container">
+            <h2 class="section-title">Trusted By Thousands</h2>
+            <div class="trust-badges">
+                <div class="badge">
+                    <i class="fas fa-download"></i>
+                    <h4>10K+ Downloads</h4>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-lock"></i>
+                    <h4>100% Secure</h4>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>No Spam Guarantee</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Limited Time Offer – Don't Miss Out!</h2>
+                <p>Grab your free ebook before this offer expires</p>
+                <a href="#form" class="hero-cta">Claim Your Free Ebook Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2026 LeadMaster. All rights reserved. | <a href="#" style="color:#8B5CF6;">Privacy Policy</a> | No spam, ever. By Adwiz Template</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-content">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>Success! 🎉</h2>
+            <p>Thank you! Check your email for instant ebook access. You'll also get weekly marketing tips.</p>
+            <button onclick="closeModal()" style="background:#10B981;color:white;border:none;padding:1rem 2rem;border-radius:12px;font-size:1.1rem;cursor:pointer;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(anchor.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+
+        // Form Validation & Submit
+        const form = document.getElementById('leadForm');
+        const submitBtn = form.querySelector('.submit-btn');
+        const modal = document.getElementById('successModal');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            // Reset styles
+            form.querySelectorAll('input').forEach(input => input.style.borderColor = '#e2e8f0');
+
+            // Validation
+            if (!name || !email || !phone) {
+                alert('Please fill all fields.');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('email').style.borderColor = '#EF4444';
+                alert('Please enter valid email.');
+                return;
+            }
+            if (!/^[\+]?[1-9][\d]{0,15}$/.test(phone.replace(/\s/g, ''))) {
+                document.getElementById('phone').style.borderColor = '#EF4444';
+                alert('Please enter valid phone.');
+                return;
+            }
+
+            // Simulate submit
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+            setTimeout(() => {
+                modal.style.display = 'flex';
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Get Instant Access <i class="fas fa-download"></i>';
+            }, 1500);
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').style.background = window.scrollY > 50 
+                ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.95)';
+        });
+
+        // Animate on scroll (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        document.querySelectorAll('.benefit-card, .testimonial-card, .badge').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
